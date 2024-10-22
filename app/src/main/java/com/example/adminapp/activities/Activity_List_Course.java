@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,10 +27,10 @@ import java.util.ArrayList;
 
 public class Activity_List_Course extends AppCompatActivity {
     RecyclerView recyclerView;
-    FloatingActionButton add_button;
+    FloatingActionButton add_button ,back_out;
     TextView no_data;
     DatabaseHelper dbHelper;
-    ArrayList<String> course_id, course_name, course_description, course_dayofweek, course_time, course_type;
+    ArrayList<String> course_id, course_namecourse, course_description, course_dayofweek, course_time, course_type;
     ArrayList<Integer> course_duration, course_capacity;
     ArrayList<Double> course_price;
     YogaAdapter yogaAdapter;
@@ -53,7 +54,7 @@ public class Activity_List_Course extends AppCompatActivity {
 
         dbHelper = new DatabaseHelper(Activity_List_Course.this);
         course_id = new ArrayList<>();
-        course_name = new ArrayList<>();
+        course_namecourse = new ArrayList<>();
         course_description = new ArrayList<>();
         course_dayofweek = new ArrayList<>();
         course_time = new ArrayList<>();
@@ -64,7 +65,7 @@ public class Activity_List_Course extends AppCompatActivity {
 
         storeDataInArrays();
 
-        yogaAdapter = new YogaAdapter(Activity_List_Course.this, this, course_id, course_name,
+        yogaAdapter = new YogaAdapter(Activity_List_Course.this, this, course_id, course_namecourse,
                 course_description, course_dayofweek, course_time,
                 course_duration, course_capacity, course_type, course_price);
 
@@ -83,11 +84,12 @@ public class Activity_List_Course extends AppCompatActivity {
     void storeDataInArrays() {
         Cursor cursor = dbHelper.readAllData();
         if (cursor.getCount() == 0) {
-            no_data.setVisibility(View.VISIBLE);
+            no_data.setVisibility(View.GONE);
+            Toast.makeText(this, "No data available", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
                 course_id.add(cursor.getString(0));
-                course_name.add(cursor.getString(1));
+                course_namecourse.add(cursor.getString(1));
                 course_description.add(cursor.getString(2));
                 course_dayofweek.add(cursor.getString(3));
                 course_time.add(cursor.getString(4));
@@ -97,8 +99,11 @@ public class Activity_List_Course extends AppCompatActivity {
                 course_price.add(cursor.getDouble(8)); // Lấy dữ liệu kiểu double cho price
             }
             no_data.setVisibility(View.GONE);
+            Log.d("Activity_List_Course", "Dữ liệu đã được tải vào ArrayList: " + course_id.size() + " bản ghi.");
+            Toast.makeText(this, "Data loaded successfully", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

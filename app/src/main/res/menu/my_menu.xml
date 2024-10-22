@@ -5,7 +5,7 @@
     <item
         android:id="@+id/delete_all"
         android:title="Delete All"
-        android:icon="@drawable/baseline_cancel_24"
+        android:icon="@drawable/icon_delete"
         app:showAsAction="never"/>
 
 </menu>

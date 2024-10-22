@@ -13,41 +13,38 @@
         android:theme="@style/Theme.AdminApp"
         tools:targetApi="31">
         <activity
-            android:name=".activities.Activity_UpdateCourse"
+            android:name=".MainActivity"
+            android:label="Yoga Management"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.Activity_UpdateCourse"
+            android:label="Detail Course"
+
+            android:exported="true">
+
         </activity>
         <activity
             android:name=".activities.Activity_AddCourse"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:label="Add Course"
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true">
+
         </activity>
         <activity
             android:name=".activities.Activity_List_Course"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:label="List Course"
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

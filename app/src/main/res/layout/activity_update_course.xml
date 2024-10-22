@@ -5,17 +5,22 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Activity_UpdateCourse">
+    android:padding="30dp"
+    tools:context=".activities.Activity_UpdateCourse"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="6dp"
         android:orientation="vertical"
-        android:padding="16dp"
-        >
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="16dp">
 
         <EditText
-            android:id="@+id/name_input2"
+            android:id="@+id/course_name_txt2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="12dp"
@@ -23,6 +28,7 @@
             android:minHeight="48dp"
             android:hint="Course Name"
             android:inputType="text" />
+
 
         <EditText
             android:id="@+id/description_input2"
@@ -34,25 +40,43 @@
             android:hint="Description"
             android:inputType="text" />
 
-        <EditText
-            android:id="@+id/dayOfWeek_input2"
-            android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/tvDayOfWeek"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:minHeight="48dp"
-            android:hint="Day of Week"
-            android:inputType="text" />
+            android:text="Day of the Week"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <Spinner
+            android:id="@+id/spinnerDayOfWeek2"
+            android:entries="@array/week_days"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            />
+
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time of Course"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
 
         <EditText
             android:id="@+id/time_input2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
             android:minHeight="48dp"
-            android:hint="Time"
-            android:inputType="time" />
+            android:hint="Select Time"
+            android:focusable="false"
+            android:clickable="true" />
+
 
         <EditText
             android:id="@+id/duration_input2"
@@ -64,6 +88,7 @@
             android:hint="Duration (minutes)"
             android:inputType="number" />
 
+
         <EditText
             android:id="@+id/capacity_input2"
             android:layout_width="match_parent"
@@ -73,6 +98,8 @@
             android:minHeight="48dp"
             android:hint="Capacity"
             android:inputType="number" />
+
+
         <EditText
             android:id="@+id/price_input2"
             android:layout_width="match_parent"
@@ -80,19 +107,43 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:minHeight="48dp"
-            android:hint="Price"
-            android:inputType="number" />
+            android:hint="Price (£)"
+            android:inputType="numberDecimal" />
 
-        <EditText
-            android:id="@+id/type_input2"
+
+        <TextView
+            android:id="@+id/tvType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type of Class"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <RadioGroup
+            android:id="@+id/rgType2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:minHeight="48dp"
-            android:hint="Course Type"
-            android:inputType="text" />
+            android:orientation="vertical">
 
+            <RadioButton
+                android:id="@+id/rbFlowYoga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flow Yoga" />
+
+            <RadioButton
+                android:id="@+id/rbAerialYoga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aerial Yoga" />
+
+            <RadioButton
+                android:id="@+id/rbFamilyYoga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Family Yoga" />
+        </RadioGroup>
         <Button
             android:id="@+id/update_button"
             android:layout_width="match_parent"

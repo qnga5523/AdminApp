@@ -14,12 +14,12 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private Context context;
-    private static final String DATABASE_NAME = "yogamobile.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final String DATABASE_NAME = "yoga.db";
+    private static final int DATABASE_VERSION = 1;
 
     private static final String TABLE_YOGA_MOBILE = "yoga_mobile";
     private static final String COLUMN_ID = "_id";
-    private static final String COLUMN_NAMECOURSE = "name";
+    private static final String COLUMN_NAMECOURSE = "namecourse";
     private static final String COLUMN_DAY_OF_WEEK = "dayOfWeek";
     private static final String COLUMN_TIME = "time";
     private static final String COLUMN_CAPACITY = "capacity";
@@ -55,11 +55,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Phương thức thêm khóa học yoga
-    public boolean addCourse(String name, String dayOfWeek, String time, int capacity, int duration, double price, String type, String description) {
+
+    public boolean addCourse(String namecourse, String dayOfWeek, String time, int capacity, int duration, double price, String type, String description) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_NAMECOURSE, name);
+        cv.put(COLUMN_NAMECOURSE, namecourse);
         cv.put(COLUMN_DAY_OF_WEEK, dayOfWeek);
         cv.put(COLUMN_TIME, time);
         cv.put(COLUMN_CAPACITY, capacity);
@@ -84,10 +84,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean updateCourse(String id,String name ,String dayOfWeek, String time, int capacity, int duration, double price, String type, String description) {
+    public boolean updateCourse(String id, String namecourse, String dayOfWeek, String time, int capacity, int duration, double price, String type, String description) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_NAMECOURSE, name);
+        cv.put(COLUMN_NAMECOURSE, namecourse);
         cv.put(COLUMN_DAY_OF_WEEK, dayOfWeek);
         cv.put(COLUMN_TIME, time);
         cv.put(COLUMN_CAPACITY, capacity);
@@ -97,24 +97,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_DESCRIPTION, description);
 
         long result = db.update(TABLE_YOGA_MOBILE, cv, "_id=?", new String[]{id});
-        return result != -1;
+        if (result == -1) {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 
-    public void deleteAllData(){
+
+    public void deleteAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_YOGA_MOBILE);
     }
+
     public boolean deleteOneCourse(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_YOGA_MOBILE, "_id=?", new String[]{id});
         return result != -1;
     }
 
-    // Phương thức đọc tất cả dữ liệu
     public Cursor readAllData() {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_YOGA_MOBILE, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_YOGA_MOBILE, null);
+
+        // Kiểm tra xem dữ liệu có tồn tại không
+        if (cursor.getCount() == 0) {
+            Log.d("DatabaseHelper", "No data found in the database.");
+        } else {
+            Log.d("DatabaseHelper", "Data found: " + cursor.getCount() + " records.");
+        }
+
+        return cursor;
     }
 
 
 }
+
+
+
+
